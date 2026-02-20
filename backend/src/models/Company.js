@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const companySchema = new mongoose.Schema({
     name: {
         type: String,
-        rqeuired: [true, "Company name is required"],
+        required: [true, "Company name is required"],
         trim: true,
     },
 

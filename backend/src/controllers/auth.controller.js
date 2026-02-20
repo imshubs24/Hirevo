@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const User = require('../models/User');
+require("dotenv").config();
 
 /**
  * -------------------------------------
@@ -7,16 +8,29 @@ const User = require('../models/User');
  * -------------------------------------
  */
 
-const generateToken = (user) => {
-    return jwt.sign({
-        id: user._id,
-        role: user.role,
-    },
+const sendTokenResponse = (user, statusCode, res, message) => {
+    const token = jwt.sign(
+        {
+            id: user._id,
+            role: user.role,
+        },
         process.env.JWT_SECRET,
         {
             expiresIn: "1d",
         }
     );
+
+    res.cookie("token", token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "strict",
+        maxAge: 24 * 60 * 60 * 1000,
+    });
+
+    res.status(statusCode).json({
+        success: true,
+        message,
+    });
 };
 
 /**
@@ -25,12 +39,13 @@ const generateToken = (user) => {
  * -------------------------------------
  */
 
-const register = async (req, res, next) => {
+const register = async (req, res) => {
     try {
         const { name, email, password, role } = req.body;
 
         // Check if user already exists
         const existingUser = await User.findOne({ email });
+
         if (existingUser) {
             return res.status(400).json({
                 success: false,
@@ -46,14 +61,9 @@ const register = async (req, res, next) => {
             role: role || "candidate",
         });
 
-        const token = generateToken(user);
-
-        res.status(201), json({
-            success: true,
-            message: "User registered successfully",
-            token,
-        });
+        sendTokenResponse(user, 201, res, "User registered successfully");
     } catch (error) {
+        console.log(error);
         return res.status(500).json({ error: "Internal server error" });
     }
 }
@@ -64,7 +74,7 @@ const register = async (req, res, next) => {
  * -------------------------------------
  */
 
-const login = async (req, res, next) => {
+const login = async (req, res) => {
     try {
         const { email, password } = req.body;
 
@@ -78,6 +88,13 @@ const login = async (req, res, next) => {
             });
         };
 
+        if (user.isSuspended) {
+            return res.status(403).json({
+                status: false,
+                message: "Account suspended",
+            });
+        };
+
         const isMatch = await user.comparePassword(password);
 
         if (!isMatch) {
@@ -87,13 +104,7 @@ const login = async (req, res, next) => {
             });
         };
 
-        const token = generateToken(user);
-
-        res.status(200).json({
-            success: true,
-            message: "Login successfull",
-            token,
-        });
+        sendTokenResponse(user, 200, res, "Login successful");
     } catch (error) {
         return res.status(500).json({ error: "Internal server error" });
     }
