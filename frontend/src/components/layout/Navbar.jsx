@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import AuthDrawer from "../auth/AuthDrawer";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [authOpen, setAuthOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -69,12 +71,12 @@ const Navbar = () => {
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center space-x-4">
-            <Link
-              to="/login"
-              className="text-sm font-medium text-gray-600 hover:text-indigo-600 transition hover:cursor-pointer"
+            <button
+              onClick={() => setAuthOpen(true)}
+              className="text-sm font-medium text-gray-600 hover:text-indigo-600 transition cursor-pointer"
             >
               Login
-            </Link>
+            </button>
 
             <Link
               to="/register"
@@ -140,6 +142,10 @@ const Navbar = () => {
           </div>
         </div>
       )}
+      <AuthDrawer
+        isOpen={authOpen}
+        onClose={() => setAuthOpen(false)}
+      />
     </nav>
   );
 };
