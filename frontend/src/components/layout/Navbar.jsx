@@ -24,42 +24,44 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`sticky top-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-white shadow-sm border-b border-gray-100"
-          : "bg-white"
-      }`}
+      className={`sticky top-0 z-50 transition-all duration-300 ${isScrolled
+        ? "bg-white shadow-sm border-b border-gray-100"
+        : "bg-white"
+        }`}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
 
           {/* Logo */}
-          <button
+          <img
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="text-xl font-semibold text-indigo-600"
-          >
-            Hirevo
-          </button>
+            src='/hirevo-logo.webp'
+            alt="Hirevo Logo"
+            className="h-16 w-auto hover:cursor-pointer"
+            width={40}
+            height={40}
+            loading="eager"
+          />
 
           {/* Desktop Links */}
           <div className="hidden md:flex items-center space-x-8 text-sm font-medium text-gray-600">
             <button
               onClick={() => scrollToSection("features")}
-              className="hover:text-indigo-600 transition"
+              className="hover:text-indigo-600 transition hover:cursor-pointer"
             >
               Features
             </button>
 
             <button
               onClick={() => scrollToSection("how-it-works")}
-              className="hover:text-indigo-600 transition"
+              className="hover:text-indigo-600 transition hover:cursor-pointer"
             >
               How It Works
             </button>
 
             <button
               onClick={() => scrollToSection("recruiters")}
-              className="hover:text-indigo-600 transition"
+              className="hover:text-indigo-600 transition hover:cursor-pointer"
             >
               For Recruiters
             </button>
@@ -69,14 +71,14 @@ const Navbar = () => {
           <div className="hidden md:flex items-center space-x-4">
             <Link
               to="/login"
-              className="text-sm font-medium text-gray-600 hover:text-indigo-600 transition"
+              className="text-sm font-medium text-gray-600 hover:text-indigo-600 transition hover:cursor-pointer"
             >
               Login
             </Link>
 
             <Link
               to="/register"
-              className="text-sm font-medium bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition shadow-sm"
+              className="text-sm font-medium bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition shadow-sm hover:cursor-pointer"
             >
               Get Started
             </Link>
