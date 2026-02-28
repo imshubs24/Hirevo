@@ -1,9 +1,15 @@
-import React from 'react'
+import AuthLayout from "../components/auth/AuthLayout";
+import LoginForm from "../components/auth/LoginForm";
 
 const Login = () => {
   return (
-    <div>Login</div>
-  )
-}
+    <AuthLayout
+      title="Sign in to your account"
+      subtitle="Access your dashboard and manage your hiring workflow."
+    >
+      <LoginForm />
+    </AuthLayout>
+  );
+};
 
-export default Login
+export default Login;

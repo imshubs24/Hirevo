@@ -2,6 +2,8 @@ const express = require('express');
 const helmet = require("helmet");
 const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
+const cors = require("cors");
+const rateLimit = require('')
 const app = express();
 
 /*
@@ -12,6 +14,26 @@ app.use(morgan("dev"));
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(
+    cors({
+        origin: process.env.FRONTEND_URL,
+        credentials: true,
+    })
+);
+
+{
+    /* Rate Limiter */
+}
+// const authLimiter = rateLimit({
+//     windowMs: 15 * 60 * 1000,
+//     max: 20,
+// });
+// app.use("/api/auth", authLimiter);
+
+{
+    /* Routes - Middlewares */
+}
+
 app.use('/api/v1/auth', require("./routes/auth.routes"));
 
 /**

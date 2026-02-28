@@ -1,9 +1,15 @@
-import React from 'react'
+import AuthLayout from "../components/auth/AuthLayout";
+import RegisterForm from "../components/auth/RegisterForm";
 
 const Register = () => {
   return (
-    <div>Register</div>
-  )
-}
+    <AuthLayout
+      title="Create your account"
+      subtitle="Start managing your hiring process with Hirevo."
+    >
+      <RegisterForm />
+    </AuthLayout>
+  );
+};
 
-export default Register
+export default Register;
