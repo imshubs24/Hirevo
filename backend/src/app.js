@@ -3,7 +3,7 @@ const helmet = require("helmet");
 const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
-const rateLimit = require('')
+const rateLimit = require('express-rate-limit')
 const app = express();
 
 /*

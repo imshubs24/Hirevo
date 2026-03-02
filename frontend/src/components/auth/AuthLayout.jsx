@@ -1,26 +1,25 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router";
 import Container from "../layout/Container";
 
 const AuthLayout = ({ title, subtitle, children }) => {
+
+    const navigate = useNavigate();
+
     return (
         <div className="min-h-screen bg-gray-50 flex flex-col">
 
             {/* Top Bar */}
             <div>
                 <Container>
-                    <Link
-                        to="/"
-                    >
-                        <img
-                            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-                            src='/hirevo-logo.webp'
-                            alt="Hirevo Logo"
-                            className="h-16 w-auto hover:cursor-pointer"
-                            width={40}
-                            height={40}
-                            loading="eager"
-                        />
-                    </Link>
+                    <img
+                        onClick={() => navigate('/')}
+                        src='/hirevo-logo.webp'
+                        alt="Hirevo Logo"
+                        className="h-16 w-auto hover:cursor-pointer"
+                        width={40}
+                        height={40}
+                        loading="eager"
+                    />
                 </Container>
             </div>
 

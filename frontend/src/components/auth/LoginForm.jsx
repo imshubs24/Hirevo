@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { loginUser } from "../../services/authService";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 const LoginForm = () => {
     const navigate = useNavigate();
+    const { fetchUser } = useAuth();
 
     const [formData, setFormData] = useState({
         email: "",
@@ -27,6 +29,9 @@ const LoginForm = () => {
 
         try {
             await loginUser(formData);
+
+            // Immediately fetch user from backend
+            await fetchUser();
 
             // Cookie is automatically stored by browser
             navigate("/dashboard"); // redirect after login

@@ -123,13 +123,15 @@ const Navbar = () => {
             </button>
 
             <div className="pt-4 border-t border-gray-100 flex flex-col space-y-3">
-              <Link
-                to="/login"
+              <button
                 className="hover:text-indigo-600"
-                onClick={() => setIsOpen(false)}
+                onClick={() => {
+                  setIsOpen(false);
+                  setAuthOpen(true);
+                }}
               >
                 Login
-              </Link>
+              </button>
 
               <Link
                 to="/register"

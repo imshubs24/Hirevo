@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { registerUser } from "../../services/authService";
+import { useAuth } from "../../context/AuthContext";
 
 const RegisterForm = () => {
     const [formData, setFormData] = useState({
-        fullName: "",
+        name: "",
         email: "",
         password: "",
     });
+    const { fetchUser } = useAuth();
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
@@ -28,7 +30,9 @@ const RegisterForm = () => {
         try {
             await registerUser(formData);
 
-            // Redirect after success
+            // Immediately fetch user from backend
+            await fetchUser();
+
             navigate("/dashboard");
             // or use navigate()
 
@@ -50,8 +54,8 @@ const RegisterForm = () => {
                 </label>
                 <input
                     type="text"
-                    name="fullName"
-                    value={formData.fullName}
+                    name="name"
+                    value={formData.name}
                     onChange={handleChange}
                     required
                     className="mt-2 w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
