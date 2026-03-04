@@ -85,7 +85,7 @@ const LoginForm = () => {
             <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-indigo-600 text-white py-3 rounded-lg font-medium hover:bg-indigo-700 transition disabled:opacity-70"
+                className="w-full bg-indigo-600 text-white py-3 rounded-lg font-medium hover:bg-indigo-700 transition disabled:opacity-70 cursor-pointer"
             >
                 {loading ? "Signing in..." : "Sign In"}
             </button>

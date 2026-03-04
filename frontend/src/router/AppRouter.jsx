@@ -4,6 +4,7 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import ProtectedRoute from "../components/auth/ProtectedRoute";
 import Dashboard from "../pages/dashboard/Dashboard";
+import DashboardLayout from "../layouts/DashboardLayout";
 
 const AppRouter = () => {
     return (
@@ -15,10 +16,12 @@ const AppRouter = () => {
                 path="/dashboard"
                 element={
                     <ProtectedRoute>
-                        <Dashboard />
+                        <DashboardLayout />
                     </ProtectedRoute>
                 }
-            />
+            >
+                <Route index element={<Dashboard />} />
+            </Route>
         </Routes>
     )
 }
