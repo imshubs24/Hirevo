@@ -25,7 +25,7 @@ export default function Topbar() {
             </div>
 
             <span className="text-sm text-gray-600">
-                {user?.email}
+                {user?.name}
             </span>
 
         </header>

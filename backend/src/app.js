@@ -35,6 +35,7 @@ app.use(
 }
 
 app.use('/api/v1/auth', require("./routes/auth.routes"));
+app.use("/api/v1/companies", require("./routes/company.routes"));
 
 /**
  * -----------------------

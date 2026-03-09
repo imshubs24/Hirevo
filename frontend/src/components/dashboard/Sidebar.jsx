@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { LayoutDashboard, Briefcase, LogOut, ChevronLeft } from "lucide-react";
+import { LogOut, ChevronLeft } from "lucide-react";
 import { useAuth } from "../../context/AuthContext";
 import { useDashboardUI } from "../../context/DashboardUIContext";
 import { dashboardNav } from "../../config/dashboardNav";
