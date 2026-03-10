@@ -5,6 +5,7 @@ import Register from "../pages/Register";
 import ProtectedRoute from "../components/auth/ProtectedRoute";
 import Dashboard from "../pages/dashboard/Dashboard";
 import DashboardLayout from "../layouts/DashboardLayout";
+import CompaniesPage from "../pages/dashboard/companies/CompaniesPage";
 
 const AppRouter = () => {
     return (
@@ -21,6 +22,7 @@ const AppRouter = () => {
                 }
             >
                 <Route index element={<Dashboard />} />
+                <Route path="companies" element={<CompaniesPage />} />
             </Route>
         </Routes>
     )
