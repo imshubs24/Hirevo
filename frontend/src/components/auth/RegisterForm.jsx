@@ -8,6 +8,7 @@ const RegisterForm = () => {
         name: "",
         email: "",
         password: "",
+        role: "candidate",
     });
     const { fetchUser } = useAuth();
 
@@ -48,6 +49,44 @@ const RegisterForm = () => {
     return (
         <form className="space-y-6" onSubmit={handleSubmit}>
 
+            <div className="flex bg-gray-100 p-1 rounded-lg">
+
+                <button
+                    type="button"
+                    onClick={() =>
+                        setFormData((prev) => ({ ...prev, role: "candidate" }))
+                    }
+                    className={`flex-1 py-2 text-sm rounded-md transition cursor-pointer
+        ${formData.role === "candidate"
+                            ? "bg-white shadow text-indigo-600 font-medium"
+                            : "text-gray-600"
+                        }`}
+                >
+                    Candidate
+                </button>
+
+                <button
+                    type="button"
+                    onClick={() =>
+                        setFormData((prev) => ({ ...prev, role: "recruiter" }))
+                    }
+                    className={`flex-1 py-2 text-sm rounded-md transition cursor-pointer
+        ${formData.role === "recruiter"
+                            ? "bg-white shadow text-indigo-600 font-medium"
+                            : "text-gray-600"
+                        }`}
+                >
+                    Recruiter
+                </button>
+
+            </div>
+
+            {formData.role === "recruiter" && (
+                <p className="text-xs text-gray-500">
+                    Recruiter accounts may require approval before posting jobs.
+                </p>
+            )}
+            
             <div>
                 <label className="block text-sm font-medium text-gray-700">
                     Full Name
@@ -100,7 +139,7 @@ const RegisterForm = () => {
             <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-indigo-600 text-white py-3 rounded-lg font-medium hover:bg-indigo-700 transition disabled:opacity-70"
+                className="w-full bg-indigo-600 text-white py-3 rounded-lg font-medium hover:bg-indigo-700 transition disabled:opacity-70 cursor-pointer"
             >
                 {loading ? "Creating..." : "Create Account"}
             </button>
