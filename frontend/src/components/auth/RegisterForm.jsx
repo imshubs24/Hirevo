@@ -10,13 +10,14 @@ const RegisterForm = () => {
         password: "",
         role: "candidate",
     });
-    const { fetchUser } = useAuth();
+    const { fetchUser, user } = useAuth();
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const navigate = useNavigate();
 
     const handleChange = (e) => {
+        setError("");
         setFormData((prev) => ({
             ...prev,
             [e.target.name]: e.target.value,
@@ -33,6 +34,10 @@ const RegisterForm = () => {
 
             // Immediately fetch user from backend
             await fetchUser();
+
+            if (user)
+                navigate("/dashboard")
+            return;
 
             navigate("/dashboard");
             // or use navigate()
@@ -86,7 +91,7 @@ const RegisterForm = () => {
                     Recruiter accounts may require approval before posting jobs.
                 </p>
             )}
-            
+
             <div>
                 <label className="block text-sm font-medium text-gray-700">
                     Full Name

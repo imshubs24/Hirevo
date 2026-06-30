@@ -5,7 +5,7 @@ import { useAuth } from "../../context/AuthContext";
 
 const LoginForm = () => {
     const navigate = useNavigate();
-    const { fetchUser } = useAuth();
+    const { fetchUser, user } = useAuth();
 
     const [formData, setFormData] = useState({
         email: "",
@@ -16,6 +16,7 @@ const LoginForm = () => {
     const [error, setError] = useState("");
 
     const handleChange = (e) => {
+        setError("");
         setFormData((prev) => ({
             ...prev,
             [e.target.name]: e.target.value,
@@ -33,8 +34,10 @@ const LoginForm = () => {
             // Immediately fetch user from backend
             await fetchUser();
 
-            // Cookie is automatically stored by browser
-            navigate("/dashboard"); // redirect after login
+            if (user) {
+                // Cookie is automatically stored by browser
+                navigate("/dashboard"); // redirect after login
+            }
 
         } catch (err) {
             setError(

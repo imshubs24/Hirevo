@@ -26,7 +26,7 @@ const AuthLayout = ({ title, subtitle, children }) => {
             {/* Center Content */}
             <div className="flex flex-1 items-center justify-center">
                 <Container className="flex justify-center">
-                    <div className="w-full max-w-sm bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+                    <div className=" w-auto md:min-w-xl max-w-sm bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
 
                         <h1 className="text-2xl font-bold text-gray-900">
                             {title}
